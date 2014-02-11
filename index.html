@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Snow Demo</title>           
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>  
+<script src="js/52wulian.min.js" type="text/javascript"></script>        
+<script>
+	thisURL = document.URL; 
+	function stop() {
+			removeSnow();
+	}
+	function getParameter(paraStr, url)
+	{
+		var result = ""; 
+		//获取URL中全部参数列表数据
+		var str = "&" + url.split("?")[1];
+		var paraName = paraStr + "=";
+		//判断要获取的参数是否存在
+		if(str.indexOf("&"+paraName)!=-1)
+		{
+			//如果要获取的参数到结尾是否还包含“&”
+			if(str.substring(str.indexOf(paraName),str.length).indexOf("&")!=-1)
+			{
+				//得到要获取的参数到结尾的字符串
+				var TmpStr=str.substring(str.indexOf(paraName),str.length);
+				//截取从参数开始到最近的“&”出现位置间的字符
+				result=TmpStr.substr(TmpStr.indexOf(paraName),TmpStr.indexOf("&")-TmpStr.indexOf(paraName)).split("=")[1];   
+			} 
+			else
+			{   
+				result=str.substring(str.indexOf(paraName),str.length).split("=")[1];   
+			}
+		}   
+		else
+		{   
+			result="null";   
+		}   
+		return (result.replace("&",""));   
+	}
+	
+	function Snow() {
+		
+		var type = getParameter("type",thisURL);
+		var size = getParameter("size",thisURL);
+		var num = getParameter("num",thisURL);
+		//document.write( "<tr><td valign=top>r: </td><td>"+type+"</td></tr>" ); 
+		//document.write( "<tr><td valign=top>r: </td><td>"+size+"</td></tr>" ); 
+		//document.write( "<tr><td valign=top>r: </td><td>"+num+"</td></tr>" ); 
+		if(type=="null") {
+			type = "images/snow/";
+			if(size=="null")
+				size=5;
+		}
+		if(type=="big")  {
+			type="images/big-24/";
+			if(size=="null")
+				size=12;
+		}
+		if(type=="ice") {
+			type="images/ice-24/";
+			if(size=="null")
+				size=12;
+		}
+		if(type=="medium")	{
+			type="images/medium-10/";
+			if(size=="null")
+				size=10;
+		}
+		if(type=="presents"){
+			type="images/presents-32/";
+			if(size=="null")
+				size=16;
+		}
+		if(type=="small"){
+			type="images/small-02/";
+			if(size=="null")
+				size=2;
+		}
+		if(type=="snow") {
+			type="images/snow/";
+			if(size=="null")
+				size=5;
+		}
+		if(num=="null") {
+			num = 100;
+		}
+		
+		//3 parameter 
+		//first the type of snow 
+		//seconde the size
+		//third the num
+		createSnow(type,size,num);
+	}
+	
+	
+	Snow();
+</script>
+
+
+<input type="button" value="停止" onclick="stop();">
+
+
+</body>
+</html>
